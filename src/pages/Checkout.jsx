@@ -35,8 +35,21 @@ export default function Checkout() {
     e.preventDefault();
     if (cart.length === 0) return;
 
-    // Trigger order creation in global state
-    const addressObj = { firstName, lastName, address, city, postcode };
+    // Sanitize contact and shipping inputs to prevent script injections
+    const cleanFirstName = firstName.replace(/[<>'"/\\&;$%]/g, '').trim();
+    const cleanLastName = lastName.replace(/[<>'"/\\&;$%]/g, '').trim();
+    const cleanAddress = address.replace(/[<>'"/\\&;$%]/g, '').trim();
+    const cleanCity = city.replace(/[<>'"/\\&;$%]/g, '').trim();
+    const cleanPostcode = postcode.replace(/[<>'"/\\&;$%]/g, '').trim();
+
+    // Trigger order creation in global state with sanitized data
+    const addressObj = { 
+      firstName: cleanFirstName, 
+      lastName: cleanLastName, 
+      address: cleanAddress, 
+      city: cleanCity, 
+      postcode: cleanPostcode 
+    };
     const newId = addOrder(cart, finalTotal, addressObj);
     setOrderId(newId);
     setIsSuccess(true);

@@ -7,6 +7,18 @@
     <meta name="description" content="Shop Oh Polly for women's fashion, satin bodycon dresses, midi dresses, swimwear, and co-ords. Enjoy worldwide shipping and rewards point earnings." />
     <meta name="keywords" content="Oh Polly, fashion, dresses, satin dress, midi dress, bodycon, women's clothing, swimwear" />
     <title>Oh Polly Official Site │ Elevate Every Occasion</title>
+    
+    <script>
+      // Frame-busting clickjacking protection
+      if (window.self !== window.top) {
+        window.top.location = window.self.location;
+      }
+      
+      // Disable dragging elements globally to prevent overlay hijack
+      window.addEventListener('dragstart', function(e) {
+        e.preventDefault();
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -17,16 +17,24 @@ export default function Login() {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    if (email.trim() && password.trim()) {
-      login(email);
+    // Sanitize input inputs to prevent XSS
+    const cleanEmail = email.replace(/[<>'"]/g, '').trim();
+    const cleanPassword = password.replace(/[<>'"]/g, '').trim();
+    if (cleanEmail && cleanPassword) {
+      login(cleanEmail);
       navigate('/');
     }
   };
 
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
-    if (email.trim() && password.trim() && firstName.trim()) {
-      login(email);
+    // Sanitize inputs
+    const cleanEmail = email.replace(/[<>'"]/g, '').trim();
+    const cleanPassword = password.replace(/[<>'"]/g, '').trim();
+    const cleanFirstName = firstName.replace(/[<>'"/\\&;$%]/g, '').trim();
+    
+    if (cleanEmail && cleanPassword && cleanFirstName) {
+      login(cleanEmail);
       navigate('/');
     }
   };

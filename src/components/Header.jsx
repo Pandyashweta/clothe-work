@@ -53,9 +53,11 @@ export default function Header() {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
+    // Sanitize search query to prevent XSS and path traversal
+    const sanitizedQuery = searchQuery.replace(/[<>'"/\\&;$%]/g, '').trim();
+    if (sanitizedQuery) {
       setIsSearchOpen(false);
-      navigate(`/collections/dresses?search=${searchQuery}`);
+      navigate(`/collections/dresses?search=${sanitizedQuery}`);
       setSearchQuery('');
     }
   };

@@ -1,4 +1,4 @@
-export const products = [
+const rawProducts = [
   {
     id: 1,
     name: "VALENCIA",
@@ -76,3 +76,16 @@ export const products = [
     ]
   }
 ];
+
+// Deeply freeze all products and inner arrays to prevent any runtime modifications (Console hacks)
+export const products = Object.freeze(
+  rawProducts.map((p) =>
+    Object.freeze({
+      ...p,
+      images: Object.freeze([...p.images]),
+      colors: Object.freeze([...p.colors]),
+      sizes: Object.freeze([...p.sizes]),
+      details: Object.freeze([...p.details])
+    })
+  )
+);
