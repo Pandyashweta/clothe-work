@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { MapPin, ChevronUp, MessageSquare } from 'lucide-react';
 import './Footer.css';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [countryCode, setCountryCode] = useState('+91');
   const [subscribed, setSubscribed] = useState(false);
 
   const handleSubmit = (e) => {
@@ -11,40 +14,23 @@ export default function Footer() {
     if (email.trim()) {
       setSubscribed(true);
       setEmail('');
+      setPhone('');
     }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <footer className="footer">
       <div className="container">
         
-        {/* Newsletter Section */}
-        <div className="newsletter-section">
-          <div className="newsletter-text">
-            <h3 className="newsletter-title">THE LIST EVERYONE WANTS TO BE ON</h3>
-            <p className="newsletter-subtitle">
-              Sign up for early access to collection drops, exclusive offers, and the latest trends.
-            </p>
-          </div>
-          <form className="newsletter-form" onSubmit={handleSubmit}>
-            {subscribed ? (
-              <p className="subscription-success">THANK YOU! YOU'VE BEEN ADDED TO THE LIST.</p>
-            ) : (
-              <div className="input-group">
-                <input 
-                  type="email" 
-                  placeholder="ENTER YOUR EMAIL ADDRESS" 
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="newsletter-input"
-                />
-                <button type="submit" className="newsletter-btn" aria-label="Subscribe">
-                  <ArrowRight size={20} />
-                </button>
-              </div>
-            )}
-          </form>
+        {/* Instagram Header (Top Center) */}
+        <div className="footer-instagram-header">
+          <a href="https://instagram.com/ohpolly" target="_blank" rel="noreferrer" className="instagram-link">
+            Follow us on instagram @ohpolly
+          </a>
         </div>
 
         <hr className="footer-divider" />
@@ -52,84 +38,150 @@ export default function Footer() {
         {/* Footer Navigation Columns */}
         <div className="footer-grid">
           
+          {/* Column 1: Information */}
           <div className="footer-col">
-            <h4 className="footer-col-title">HELP & INFO</h4>
+            <h4 className="footer-col-title">Information</h4>
             <ul className="footer-links">
-              <li><a href="#track">TRACK ORDER</a></li>
-              <li><a href="#delivery">DELIVERY INFORMATION</a></li>
-              <li><a href="#returns">RETURNS & EXCHANGES</a></li>
-              <li><a href="#size">SIZE GUIDE</a></li>
-              <li><a href="#contact">CONTACT US</a></li>
-              <li><a href="#faq">FAQ</a></li>
+              <li><Link to="/login">My Account</Link></li>
+              <li><a href="#contact">Help & Contact</a></li>
+              <li><Link to="/login">Rewards</Link></li>
+              <li><a href="#delivery">Delivery Information</a></li>
+              <li><a href="#size">Size Guide</a></li>
+              <li><a href="#returns">Returns</a></li>
+              <li><a href="#giftcards">Gift Cards</a></li>
             </ul>
-          </div>
 
-          <div className="footer-col">
-            <h4 className="footer-col-title">ABOUT OH POLLY</h4>
-            <ul className="footer-links">
-              <li><a href="#about">OUR STORY</a></li>
-              <li><a href="#sustainability">SUSTAINABILITY</a></li>
-              <li><a href="#careers">CAREERS</a></li>
-              <li><a href="#student">STUDENT DISCOUNT</a></li>
-              <li><a href="#affiliate">AFFILIATE PROGRAM</a></li>
-              <li><a href="#rental">OH POLLY RENTAL</a></li>
-            </ul>
-          </div>
-
-          <div className="footer-col">
-            <h4 className="footer-col-title">LEGAL</h4>
-            <ul className="footer-links">
-              <li><a href="#terms">TERMS & CONDITIONS</a></li>
-              <li><a href="#privacy">PRIVACY POLICY</a></li>
-              <li><a href="#cookies">COOKIE POLICY</a></li>
-              <li><a href="#accessibility">ACCESSIBILITY</a></li>
-              <li><a href="#promo">PROMOTION T&CS</a></li>
-            </ul>
-          </div>
-
-          <div className="footer-col footer-socials-col">
-            <h4 className="footer-col-title">CONNECT WITH US</h4>
-            <p className="socials-text">Follow us on social for behind-the-scenes content and style inspo.</p>
-            <div className="social-icons">
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="social-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            <div className="footer-extra-links">
+              <a href="#track" className="extra-link track-order-link">
+                <MapPin size={14} className="pin-icon" /> Track My Order
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook" className="social-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-              </a>
-              <a href="https://youtube.com" target="_blank" rel="noreferrer" aria-label="Youtube" className="social-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17z"/><path d="m10 15 5-3-5-3v6z"/></svg>
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noreferrer" aria-label="Twitter" className="social-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+              <a href="#privacy-settings" className="extra-link">
+                Privacy Settings
               </a>
             </div>
-            <div className="loyalty-badge">
-              <p className="loyalty-title">OH POLLY REWARDS</p>
-              <p className="loyalty-desc">Join now and earn points every time you shop.</p>
-              <a href="#loyalty" className="loyalty-link">LEARN MORE</a>
+          </div>
+
+          {/* Column 2: About Oh Polly */}
+          <div className="footer-col">
+            <h4 className="footer-col-title">About Oh Polly</h4>
+            <ul className="footer-links">
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#careers">Careers</a></li>
+              <li><a href="#sustainability">Sustainability</a></li>
+              <li><a href="#rental">Rental</a></li>
+              <li><a href="#preloved">Oh Polly Pre-Loved</a></li>
+              <li><a href="#clothingbank">Online Clothing Bank</a></li>
+              <li><a href="#slavery">Modern Slavery Statement</a></li>
+              <li><a href="#genderpay">Gender Pay Gap Report</a></li>
+            </ul>
+          </div>
+
+          {/* Column 3: T&Cs */}
+          <div className="footer-col">
+            <h4 className="footer-col-title">T&Cs</h4>
+            <ul className="footer-links">
+              <li><a href="#terms">Terms & Conditions</a></li>
+              <li><a href="#yourdata">Your Data</a></li>
+              <li><a href="#privacy">Privacy Policy</a></li>
+              <li><a href="#klarna">Klarna Faq</a></li>
+              <li><a href="#clearpay">Clearpay Faq</a></li>
+              <li><a href="#promoterms">Promotion T&C's</a></li>
+            </ul>
+          </div>
+
+          {/* Column 4: Newsletter & Badges */}
+          <div className="footer-col footer-newsletter-col">
+            <p className="newsletter-text">
+              The list everyone wants to be on. Sign up to get early access, VIP perks, and exclusive offers straight to your inbox.
+            </p>
+            
+            <form className="footer-subscribe-form" onSubmit={handleSubmit}>
+              {subscribed ? (
+                <p className="subscribe-success-msg">THANK YOU! YOU'VE BEEN SUBSCRIBED.</p>
+              ) : (
+                <div className="subscribe-fields">
+                  <input 
+                    type="email" 
+                    placeholder="Enter your email" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="subscribe-input"
+                  />
+                  <div className="phone-input-group">
+                    <select 
+                      value={countryCode} 
+                      onChange={(e) => setCountryCode(e.target.value)}
+                      className="country-select"
+                    >
+                      <option value="+91">+91</option>
+                      <option value="+1">+1</option>
+                      <option value="+44">+44</option>
+                      <option value="+61">+61</option>
+                    </select>
+                    <input 
+                      type="tel" 
+                      placeholder="Phone Number" 
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="phone-input"
+                    />
+                  </div>
+                  <button type="submit" className="subscribe-submit-btn">
+                    Subscribe
+                  </button>
+                </div>
+              )}
+            </form>
+
+            {/* App Store Badges */}
+            <div className="app-download-badges">
+              <a href="#appstore" className="app-badge-link">
+                <span className="badge-icon-apple"></span>
+                <span className="badge-text">Download on the<br /><strong>App Store</strong></span>
+              </a>
+              <a href="#googleplay" className="app-badge-link">
+                <span className="badge-icon-google"></span>
+                <span className="badge-text">GET IT ON<br /><strong>Google Play</strong></span>
+              </a>
             </div>
+
+            {/* Trustpilot Review Badge */}
+            <div className="trustpilot-footer-badge">
+              <div className="trustpilot-stars">
+                <span className="star active">★</span>
+                <span className="star active">★</span>
+                <span className="star active">★</span>
+                <span className="star active">★</span>
+                <span className="star active">★</span>
+              </div>
+              <div className="trustpilot-rating-info">
+                <span className="trustpilot-logo-text">★ Trustpilot</span>
+                <span className="reviews-count">51.8K reviews</span>
+              </div>
+            </div>
+
           </div>
 
         </div>
 
         <hr className="footer-divider" />
 
-        {/* Footer Bottom */}
-        <div className="footer-bottom">
-          <p className="copyright">© 2026 OH POLLY LTD. ALL RIGHTS RESERVED.</p>
+        {/* Footer Bottom Bar */}
+        <div className="footer-bottom-bar">
+          <p className="copyright-label">2015-2026 © Oh Polly Ltd. All rights reserved</p>
           
-          <div className="payment-icons">
-            {/* Standard safe mock representation of accepted cards */}
-            <span className="payment-card visa">VISA</span>
-            <span className="payment-card mastercard">MASTERCARD</span>
-            <span className="payment-card amex">AMEX</span>
-            <span className="payment-card paypal">PAYPAL</span>
-            <span className="payment-card klarna">KLARNA</span>
-            <span className="payment-card afterpay">AFTERPAY</span>
-          </div>
+          {/* Scroll to Top Circle Button */}
+          <button className="scroll-to-top-btn" onClick={scrollToTop} aria-label="Scroll to top">
+            <ChevronUp size={16} />
+          </button>
         </div>
 
+      </div>
+
+      {/* Floating Chat Support Widget (Bottom-Right) */}
+      <div className="support-chat-widget-floating" onClick={() => alert("SUPPORT CHAT IS CURRENTLY OFFLINE. PLEASE SUBMIT AN EMAIL!")}>
+        <MessageSquare size={20} className="chat-bubble-icon" />
       </div>
     </footer>
   );
