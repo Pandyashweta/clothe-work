@@ -234,56 +234,6 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%23fff'%3E%3Cpath d='M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58-33.2-67.2 67.2 67.2 67.2 58-33.2c18-10.3 30-30.1 30-54c0-23.9-12-43.7-30-54zm-146.7 52.1L104.6 499l220.7-121.3 60.1-60.1z'/%3E%3C/svg%3E");
 }
 
-/* Trustpilot Review Badge */
-.trustpilot-footer-badge {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.trustpilot-stars {
-  display: flex;
-  gap: 3px;
-}
-
-.trustpilot-stars .star {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  background-color: #00b67a;
-  color: #ffffff;
-  font-size: 12px;
-  border-radius: 2px;
-}
-
-.trustpilot-rating-info {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.trustpilot-logo-text {
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 700;
-  color: #00b67a;
-  letter-spacing: 0.02em;
-}
-
-.reviews-count {
-  font-family: var(--font-body);
-  font-size: 11px;
-  color: var(--color-medium-gray);
-  border: 1px solid var(--color-light-gray);
-  padding: 2px 6px;
-  border-radius: 2px;
-  background-color: #ffffff;
-}
-
 /* Bottom Bar */
 .footer-bottom-bar {
   display: flex;
@@ -360,9 +310,6 @@
   }
   .app-download-badges {
     justify-content: flex-start;
-  }
-  .trustpilot-footer-badge {
-    align-items: flex-start;
   }
 }
 

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, ChevronUp, MessageSquare } from 'lucide-react';
+import { useApp } from '../../context/AppContext';
 import './Footer.css';
 
 export default function Footer() {
+  const { user } = useApp();
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [countryCode, setCountryCode] = useState('+91');
@@ -42,9 +44,9 @@ export default function Footer() {
           <div className="footer-col">
             <h4 className="footer-col-title">Information</h4>
             <ul className="footer-links">
-              <li><Link to="/login">My Account</Link></li>
+              <li><Link to={user ? '/profile' : '/login'}>My Account</Link></li>
               <li><a href="#contact">Help & Contact</a></li>
-              <li><Link to="/login">Rewards</Link></li>
+              <li><Link to={user ? '/profile' : '/login'}>Rewards</Link></li>
               <li><a href="#delivery">Delivery Information</a></li>
               <li><a href="#size">Size Guide</a></li>
               <li><a href="#returns">Returns</a></li>
@@ -146,20 +148,7 @@ export default function Footer() {
               </a>
             </div>
 
-            {/* Trustpilot Review Badge */}
-            <div className="trustpilot-footer-badge">
-              <div className="trustpilot-stars">
-                <span className="star active">★</span>
-                <span className="star active">★</span>
-                <span className="star active">★</span>
-                <span className="star active">★</span>
-                <span className="star active">★</span>
-              </div>
-              <div className="trustpilot-rating-info">
-                <span className="trustpilot-logo-text">★ Trustpilot</span>
-                <span className="reviews-count">51.8K reviews</span>
-              </div>
-            </div>
+
 
           </div>
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../../../context/AppContext';
 import { X, Plus, Minus, Trash2, ArrowRight } from 'lucide-react';
-import { products } from '../data/products';
+import { products } from '../../../data/products';
 import './CartDrawer.css';
 
 export default function CartDrawer() {

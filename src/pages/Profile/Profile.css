@@ -1,0 +1,342 @@
+/* ===========================
+   PROFILE / ACCOUNT PAGE
+   =========================== */
+
+.account-page {
+  padding: 60px 0 100px;
+}
+
+.account-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .account-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* ===========================
+   ACCOUNT MAIN PANEL
+   =========================== */
+
+.account-main {
+  background-color: #ffffff;
+  border: 1px solid var(--color-light-gray);
+  border-radius: 4px;
+  padding: 40px;
+}
+
+.account-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 36px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--color-light-gray);
+}
+
+.welcome-tag {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--color-nude-dark);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.account-user-name {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.logout-btn {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border: 1.5px solid var(--color-black);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-black);
+  transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+  background-color: var(--color-black);
+  color: #ffffff;
+}
+
+/* ===========================
+   ORDER HISTORY SECTION
+   =========================== */
+
+.orders-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.orders-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.empty-orders-view {
+  text-align: center;
+  padding: 48px 24px;
+  border: 1px dashed var(--color-light-gray);
+  border-radius: 4px;
+}
+
+.empty-orders-view p {
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--color-medium-gray);
+  margin-bottom: 20px;
+}
+
+.shop-now-btn {
+  background-color: var(--color-black);
+  color: #ffffff;
+  padding: 14px 28px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.shop-now-btn:hover {
+  background-color: var(--color-nude-dark);
+}
+
+/* Order Card */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.order-item-card {
+  border: 1px solid var(--color-light-gray);
+  border-radius: 4px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.order-id {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.order-date {
+  font-size: 11px;
+  color: var(--color-medium-gray);
+}
+
+.order-status-badge {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background-color: var(--color-nude-light);
+  padding: 4px 10px;
+  border-radius: 100px;
+  color: var(--color-nude-dark);
+}
+
+.order-products-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 0;
+  border-top: 1px solid var(--color-light-gray);
+  border-bottom: 1px solid var(--color-light-gray);
+}
+
+.order-product-line {
+  font-size: 12px;
+  color: var(--color-medium-gray);
+}
+
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--color-medium-gray);
+}
+
+.order-total-amount {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-black);
+}
+
+/* ===========================
+   LOYALTY PORTAL CARD
+   =========================== */
+
+.loyalty-portal-card {
+  background-color: #ffffff;
+  border: 1px solid var(--color-light-gray);
+  border-radius: 4px;
+  padding: 32px;
+  position: sticky;
+  top: 120px;
+}
+
+.loyalty-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-light-gray);
+  margin-bottom: 24px;
+}
+
+.loyalty-icon {
+  color: var(--color-nude-dark);
+}
+
+.loyalty-header h3 {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.points-balance-container {
+  background: linear-gradient(135deg, var(--color-blush), var(--color-nude-light));
+  border-radius: 6px;
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.balance-label {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-dark-gray);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.points-count {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-black);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.points-value {
+  font-size: 11px;
+  color: var(--color-medium-gray);
+}
+
+/* Loyalty Tiers */
+.loyalty-tiers {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tiers-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.reward-tier-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--color-light-gray);
+}
+
+.reward-tier-card.claimed {
+  border-color: rgba(var(--color-success-rgb, 76, 175, 80), 0.3);
+  background-color: rgba(240, 255, 240, 0.6);
+}
+
+.reward-tier-card.locked {
+  opacity: 0.7;
+}
+
+.reward-info h5 {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 3px;
+}
+
+.reward-info p {
+  font-size: 10px;
+  color: var(--color-medium-gray);
+}
+
+.reward-action-btn {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: not-allowed;
+}
+
+.reward-action-btn.claimed {
+  background-color: #e8f5e9;
+  color: #388e3c;
+}
+
+.reward-action-btn.locked {
+  background-color: var(--color-bg-light);
+  color: var(--color-medium-gray);
+}
+
+@media (max-width: 768px) {
+  .account-main {
+    padding: 24px;
+  }
+
+  .account-header-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .loyalty-portal-card {
+    position: static;
+    padding: 24px;
+  }
+}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../../context/AppContext';
 import { CreditCard, CheckCircle, ArrowRight, ShieldCheck, Mail, User as UserIcon } from 'lucide-react';
 import './Checkout.css';
 
@@ -36,11 +36,11 @@ export default function Checkout() {
     if (cart.length === 0) return;
 
     // Sanitize contact and shipping inputs to prevent script injections
-    const cleanFirstName = firstName.replace(/[<>'"/\\&;$%]/g, '').trim();
-    const cleanLastName = lastName.replace(/[<>'"/\\&;$%]/g, '').trim();
-    const cleanAddress = address.replace(/[<>'"/\\&;$%]/g, '').trim();
-    const cleanCity = city.replace(/[<>'"/\\&;$%]/g, '').trim();
-    const cleanPostcode = postcode.replace(/[<>'"/\\&;$%]/g, '').trim();
+    const cleanFirstName = firstName.replace(/[<>'"\/\\&;$%]/g, '').trim();
+    const cleanLastName = lastName.replace(/[<>'"\/\\&;$%]/g, '').trim();
+    const cleanAddress = address.replace(/[<>'"\/\\&;$%]/g, '').trim();
+    const cleanCity = city.replace(/[<>'"\/\\&;$%]/g, '').trim();
+    const cleanPostcode = postcode.replace(/[<>'"\/\\&;$%]/g, '').trim();
 
     // Trigger order creation in global state with sanitized data
     const addressObj = { 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../../context/AppContext';
 import { Search, User, Heart, ShoppingBag, Menu, X } from 'lucide-react';
 import './Header.css';
 
@@ -163,7 +163,7 @@ export default function Header() {
                     {/* Col 4: Image Card */}
                     <div className="mega-col mega-img-col">
                       <div className="mega-image-card">
-                        <img src="/images/product_dress4.png" alt="New Season Drop" />
+                        <img src="/images/products/product_dress4.png" alt="New Season Drop" />
                         <div className="mega-image-overlay">
                           <h5>New In</h5>
                           <Link to="/collections/dresses" className="shop-now-underline">Shop Now</Link>
@@ -222,7 +222,7 @@ export default function Header() {
 
             {/* Account Icon */}
             <Link 
-              to="/login" 
+              to={user ? '/profile' : '/login'} 
               className="utility-item icon-btn user-btn"
               aria-label="Account"
             >
@@ -285,7 +285,7 @@ export default function Header() {
             <Link to="/collections/dresses" onClick={() => setIsMobileMenuOpen(false)} className="drawer-link">SWIMWEAR</Link>
             <Link to="/collections/dresses" onClick={() => setIsMobileMenuOpen(false)} className="drawer-link sale-link">SALE</Link>
             <hr />
-            <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="drawer-link drawer-secondary-link">MY ACCOUNT</Link>
+            <Link to={user ? '/profile' : '/login'} onClick={() => setIsMobileMenuOpen(false)} className="drawer-link drawer-secondary-link">MY ACCOUNT</Link>
             <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="drawer-link drawer-secondary-link">MY WISHLIST</Link>
           </div>
           <div className="drawer-footer">

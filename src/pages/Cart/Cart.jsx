@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../../context/AppContext';
 import { Minus, Plus, Trash2, ArrowRight, Tag } from 'lucide-react';
 import './Cart.css';
 
