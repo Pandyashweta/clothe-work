@@ -6,6 +6,7 @@ import { AppProvider } from './context/AppContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
+import CookiePopup from './components/CookiePopup';
 
 // Pages
 import Home from './pages/Home';
@@ -22,6 +23,7 @@ function App() {
         <div className="app-container">
           <Header />
           <CartDrawer />
+          <CookiePopup />
           
           <main className="main-content-layout">
             <Routes>
