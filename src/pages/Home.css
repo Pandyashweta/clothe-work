@@ -65,25 +65,18 @@
 }
 
 /* Category Grid */
-.categories-section {
-  padding: 60px 24px;
+.categories-section-fluid {
+  padding: 8px 8px 0;
+  background-color: var(--color-bg-main);
 }
 
-.section-title {
-  font-size: 18px;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 36px;
-  letter-spacing: 0.15em;
-}
-
-.categories-grid {
+.categories-grid-four {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
 }
 
-.category-card {
+.category-card-new {
   position: relative;
   cursor: pointer;
   overflow: hidden;
@@ -103,28 +96,29 @@
   transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.category-card:hover .category-img {
-  transform: scale(1.08);
+.category-card-new:hover .category-img {
+  transform: scale(1.06);
 }
 
-.category-label {
+.category-label-overlay {
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #ffffff;
-  padding: 12px 32px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+  padding: 14px 0;
+  text-align: center;
+  color: #ffffff;
   font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   transition: var(--transition-smooth);
 }
 
-.category-card:hover .category-label {
-  background-color: var(--color-black);
-  color: #ffffff;
+.category-card-new:hover .category-label-overlay {
+  background: rgba(0, 0, 0, 0.6);
 }
 
 /* Promo Banner */
@@ -394,9 +388,9 @@
     height: 70vh;
     margin-top: 100px;
   }
-  .categories-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+  .categories-grid-four {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
   .promo-container {
     flex-direction: column;
