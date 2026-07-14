@@ -4,13 +4,12 @@
   left: 0;
   width: 100%;
   z-index: 100;
-  background-color: var(--color-bg-main);
-  border-bottom: 1px solid var(--color-light-gray);
+  background-color: transparent;
   transition: var(--transition-smooth);
 }
 
 .header-wrapper.scrolled {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background-color: transparent;
 }
 
 /* Announcement Bar */
@@ -38,12 +37,16 @@
   height: 84px;
   display: flex;
   align-items: center;
-  background-color: var(--color-bg-main);
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
   transition: var(--transition-smooth);
 }
 
 .header-wrapper.scrolled .main-header {
   height: 64px;
+  background-color: var(--color-bg-main);
+  border-bottom: 1px solid var(--color-light-gray);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .header-container {
