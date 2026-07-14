@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
-import { Search, User, Heart, ShoppingBag, Menu, X, ChevronDown } from 'lucide-react';
+import { Search, User, Heart, ShoppingBag, Menu, X } from 'lucide-react';
 import './Header.css';
 
 const announcements = [
@@ -18,9 +18,8 @@ export default function Header() {
     currency,
     setCurrency,
     setIsCartOpen,
-    isSearchOpen,
-    setIsSearchOpen,
-    user
+    user,
+    currencySymbol
   } = useApp();
 
   const [annIndex, setAnnIndex] = useState(0);
@@ -53,10 +52,8 @@ export default function Header() {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    // Sanitize search query to prevent XSS and path traversal
     const sanitizedQuery = searchQuery.replace(/[<>'"/\\&;$%]/g, '').trim();
     if (sanitizedQuery) {
-      setIsSearchOpen(false);
       navigate(`/collections/dresses?search=${sanitizedQuery}`);
       setSearchQuery('');
     }
@@ -82,29 +79,144 @@ export default function Header() {
             <Menu size={22} />
           </button>
 
-          {/* Left Menu Items (Desktop Only) */}
-          <nav className="desktop-nav">
-            <Link to="/" className="nav-link">HOME</Link>
-            <Link to="/collections/dresses" className="nav-link">NEW IN</Link>
-            <Link to="/collections/dresses" className="nav-link">DRESSES</Link>
-            <Link to="/collections/dresses" className="nav-link">SWIM</Link>
-            <Link to="/collections/dresses" className="nav-link sale-link">SALE</Link>
-          </nav>
-
-          {/* Centered Logo */}
+          {/* Left-Aligned Cursive Logo */}
           <div className="header-logo-container">
-            <Link to="/" className="header-logo">
-              OH POLLY
+            <Link to="/" className="header-logo-brand">
+              <span className="logo-script">oh</span>
+              <span className="logo-text">POLLY</span>
             </Link>
           </div>
 
-          {/* Right Utilities */}
+          {/* Center Main Navigation List */}
+          <nav className="desktop-nav">
+            
+            {/* Nav Item: New In (with Mega Menu) */}
+            <div className="nav-item-wrapper has-mega">
+              <Link to="/collections/dresses" className="nav-link">New In</Link>
+              
+              {/* Mega Menu Dropdown */}
+              <div className="mega-menu">
+                <div className="container mega-menu-container">
+                  <div className="mega-menu-grid">
+                    
+                    {/* Col 1 */}
+                    <div className="mega-col">
+                      <h4 className="mega-col-title">New In</h4>
+                      <ul className="mega-links">
+                        <li><Link to="/collections/dresses">View All</Link></li>
+                        <li><Link to="/collections/dresses">New In This Month</Link></li>
+                        <li><Link to="/collections/dresses">Bo+Tee New In</Link></li>
+                      </ul>
+                    </div>
+
+                    {/* Col 2 */}
+                    <div className="mega-col">
+                      <h4 className="mega-col-title">Featured</h4>
+                      <ul className="mega-links">
+                        <li><Link to="/collections/dresses">Bestsellers</Link></li>
+                        <li><Link to="/collections/dresses">Back In Stock</Link></li>
+                        <li><Link to="/collections/dresses">Trending</Link></li>
+                        <li><Link to="/login">Rental</Link></li>
+                        <li><Link to="/collections/dresses">Pre-Order</Link></li>
+                        <li><Link to="/collections/dresses">Oh Polly Pre-Loved</Link></li>
+                      </ul>
+                    </div>
+
+                    {/* Col 3 */}
+                    <div className="mega-col">
+                      <h4 className="mega-col-title">Collections</h4>
+                      <ul className="mega-links">
+                        <li><Link to="/collections/dresses">Summer Reservations</Link></li>
+                        <li><Link to="/collections/dresses">Eivissa</Link></li>
+                        <li><Link to="/collections/dresses">Resort Nights</Link></li>
+                        <li><Link to="/collections/dresses">Saltwater & Pearls</Link></li>
+                        <li><Link to="/collections/dresses">Embellished Bloom</Link></li>
+                      </ul>
+                    </div>
+
+                    {/* Col 4: Image Card */}
+                    <div className="mega-col mega-img-col">
+                      <div className="mega-image-card">
+                        <img src="/images/product_dress4.png" alt="New Season Drop" />
+                        <div className="mega-image-overlay">
+                          <h5>New In</h5>
+                          <Link to="/collections/dresses" className="shop-now-underline">Shop Now</Link>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  {/* Mega Menu Footer Sub-bar */}
+                  <div className="mega-menu-footer">
+                    <Link to="/collections/dresses" className="mega-footer-pink-btn">
+                      Shop New In
+                    </Link>
+                    <div className="mega-footer-links">
+                      <a href="#size">Size Guide</a>
+                      <a href="#delivery">Delivery</a>
+                      <a href="#returns">Returns</a>
+                      <a href="#contact">Contact Us</a>
+                      <a href="#faq">FAQ's</a>
+                      <a href="#preloved">Oh Polly Pre-Loved</a>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <Link to="/collections/dresses" className="nav-link">Resort</Link>
+            <Link to="/collections/dresses" className="nav-link">Dresses</Link>
+            <Link to="/collections/dresses" className="nav-link">Occasion</Link>
+            <Link to="/collections/dresses" className="nav-link">Clothing</Link>
+            <Link to="/collections/dresses" className="nav-link">Shoes</Link>
+            <Link to="/collections/dresses" className="nav-link">Swim</Link>
+            <Link to="/collections/dresses" className="nav-link">Bo+Tee</Link>
+            <Link to="/collections/dresses" className="nav-link sale-link">Sale</Link>
+          </nav>
+
+          {/* Right Utilities & Inline Search */}
           <div className="header-utilities">
             
-            {/* Currency Selector */}
+            {/* Inline Search Bar */}
+            <form onSubmit={handleSearchSubmit} className="inline-search-bar">
+              <input 
+                type="text" 
+                placeholder="Try searching for... White Dresses"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <button type="submit" aria-label="Search">
+                <Search size={16} />
+              </button>
+            </form>
+
+            {/* Account Icon */}
+            <Link 
+              to="/login" 
+              className="utility-item icon-btn user-btn"
+              aria-label="Account"
+            >
+              <User size={18} />
+              {user && <span className="user-dot"></span>}
+            </Link>
+
+            {/* Wishlist Heart */}
+            <Link 
+              to="/login"
+              className="utility-item icon-btn wishlist-btn"
+              aria-label="Wishlist"
+            >
+              <Heart size={18} />
+              {wishlist.length > 0 && (
+                <span className="badge">{wishlist.length}</span>
+              )}
+            </Link>
+
+            {/* Currency switcher: e.g. GBP/£ */}
             <div className="utility-item currency-selector">
-              <span className="currency-label">{currency}</span>
-              <ChevronDown size={12} className="chevron" />
+              <span className="currency-label">{currency}/{currencySymbol}</span>
               <div className="currency-dropdown">
                 <button onClick={() => setCurrency('USD')}>USD ($)</button>
                 <button onClick={() => setCurrency('GBP')}>GBP (£)</button>
@@ -113,76 +225,19 @@ export default function Header() {
               </div>
             </div>
 
-            {/* Search Toggle */}
-            <button 
-              className="utility-item icon-btn" 
-              onClick={() => setIsSearchOpen(!isSearchOpen)}
-              aria-label="Toggle search"
-            >
-              <Search size={20} />
-            </button>
-
-            {/* Account Link */}
-            <Link 
-              to="/login" 
-              className="utility-item icon-btn user-btn"
-              aria-label="Account"
-            >
-              <User size={20} />
-              {user && <span className="user-dot"></span>}
-            </Link>
-
-            {/* Wishlist Link */}
-            <Link 
-              to="/login" // Direct to login/wishlist segment
-              className="utility-item icon-btn wishlist-btn"
-              aria-label="Wishlist"
-            >
-              <Heart size={20} />
-              {wishlist.length > 0 && (
-                <span className="badge">{wishlist.length}</span>
-              )}
-            </Link>
-
             {/* Shopping Bag Trigger */}
             <button 
               className="utility-item icon-btn bag-btn" 
               onClick={() => setIsCartOpen(true)}
               aria-label="Open bag"
             >
-              <ShoppingBag size={20} />
+              <ShoppingBag size={18} />
               {cartCount > 0 && (
                 <span className="badge">{cartCount}</span>
               )}
             </button>
 
           </div>
-        </div>
-      </div>
-
-      {/* Slide-out Search Panel */}
-      <div className={`search-panel ${isSearchOpen ? 'open' : ''}`}>
-        <div className="container search-panel-container">
-          <form onSubmit={handleSearchSubmit} className="search-form">
-            <input 
-              type="text" 
-              placeholder="SEARCH FOR DRESSES, SWIMWEAR, CLOTHING..." 
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="search-input"
-              autoFocus={isSearchOpen}
-            />
-            <button type="submit" className="search-submit-btn">
-              <Search size={20} />
-            </button>
-          </form>
-          <button 
-            className="search-close-btn" 
-            onClick={() => setIsSearchOpen(false)}
-            aria-label="Close search"
-          >
-            <X size={22} />
-          </button>
         </div>
       </div>
 
