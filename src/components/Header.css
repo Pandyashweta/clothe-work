@@ -44,11 +44,16 @@
   transition: var(--transition-smooth);
 }
 
-.header-wrapper.scrolled .main-header {
-  height: 64px;
+/* White background trigger on hover, focus, click, or scroll */
+.header-wrapper.white-bg .main-header {
   background-color: var(--color-bg-main);
   border-bottom: 1px solid var(--color-light-gray);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Height shrink trigger on page scroll */
+.header-wrapper.scrolled .main-header {
+  height: 64px;
 }
 
 .header-container {

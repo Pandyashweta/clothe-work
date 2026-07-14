@@ -26,6 +26,11 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Interaction states to control header transparency
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
   
   const navigate = useNavigate();
 
@@ -50,6 +55,15 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Window click listener to reset the clicked header state when clicking outside
+  useEffect(() => {
+    const handleOutsideClick = () => {
+      setIsClicked(false);
+    };
+    window.addEventListener('click', handleOutsideClick);
+    return () => window.removeEventListener('click', handleOutsideClick);
+  }, []);
+
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     const sanitizedQuery = searchQuery.replace(/[<>'"/\\&;$%]/g, '').trim();
@@ -59,8 +73,16 @@ export default function Header() {
     }
   };
 
+  const showWhiteHeader = isScrolled || isHovered || isFocused || isClicked;
+
   return (
-    <header className={`header-wrapper ${isScrolled ? 'scrolled' : ''}`}>
+    <header 
+      className={`header-wrapper ${showWhiteHeader ? 'white-bg' : ''} ${isScrolled ? 'scrolled' : ''}`}
+      onClick={(e) => {
+        setIsClicked(true);
+        e.stopPropagation(); // Avoid triggering window's handleOutsideClick immediately
+      }}
+    >
       {/* Announcement Bar */}
       <div className="announcement-bar">
         <p className="announcement-text">{announcements[annIndex]}</p>
@@ -91,7 +113,11 @@ export default function Header() {
           <nav className="desktop-nav">
             
             {/* Nav Item: New In (with Mega Menu) */}
-            <div className="nav-item-wrapper has-mega">
+            <div 
+              className="nav-item-wrapper has-mega"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
               <Link to="/collections/dresses" className="nav-link">New In</Link>
               
               {/* Mega Menu Dropdown */}
@@ -186,6 +212,8 @@ export default function Header() {
                 placeholder="Try searching for... White Dresses"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
               />
               <button type="submit" aria-label="Search">
                 <Search size={16} />
