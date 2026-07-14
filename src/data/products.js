@@ -1,7 +1,83 @@
 const rawProducts = [
   {
+    id: 5,
+    name: "Sela",
+    slug: "sela-embellished-skirt-chiffon-mini-dress-in-aqua",
+    tagline: "Embellished Skirt Chiffon Mini Dress in Aqua",
+    price: 110.00,
+    rating: 4.8,
+    reviewCount: 17,
+    images: ["/images/product_dress3.png"],
+    colors: ["Sky Blue", "Blush Pink", "White"],
+    sizes: ["XXS", "XS", "S", "M", "L", "XL"],
+    description: "Make an entrance in Sela. Featuring a plunge cowl neck bodice in lightweight semi-sheer chiffon and a structured mini skirt adorned with hand-sewn shimmering sequins.",
+    details: [
+      "Sequinned structured mini skirt",
+      "Halter cowl neck styling",
+      "Semi-sheer chiffon bodice",
+      "Style code: OP-SLA-AQ"
+    ]
+  },
+  {
+    id: 6,
+    name: "Livia",
+    slug: "livia-modal-lace-trim-midaxi-dress-in-pastel-yellow",
+    tagline: "Modal Lace-Trim Midaxi Dress in Pastel Yellow",
+    price: 55.00,
+    rating: 4.9,
+    reviewCount: 17,
+    images: ["/images/product_dress2.png"],
+    colors: ["Pastel Yellow", "Cream", "Black"],
+    sizes: ["XS", "S", "M", "L", "XL"],
+    description: "Romantic and effortless. Livia is crafted from our ultra-soft modal fabric with delicate lace-trimming around the bust cup. Flowing midaxi skirt with subtle pleat details.",
+    details: [
+      "Lace-trimmed underwire cups",
+      "Adjustable shoulder straps",
+      "Super soft stretch modal",
+      "Style code: OP-LVA-YL"
+    ]
+  },
+  {
+    id: 7,
+    name: "Vana",
+    slug: "vana-fringed-mini-dress-in-aqua",
+    tagline: "Fringed Mini Dress in Aqua",
+    price: 75.00,
+    rating: 4.7,
+    reviewCount: 9,
+    images: ["/images/product_dress1.png"],
+    colors: ["Aqua Blue", "Blush Pink"],
+    sizes: ["XXS", "XS", "S", "M", "L", "XL"],
+    description: "Designed to dance in. Vana is covered in fluid tier fringing that catches the light and moves with you. Underwired cups and adjustable cross back straps.",
+    details: [
+      "Allover fluid fringing tiers",
+      "Underwired structured cups",
+      "Satin cross back straps",
+      "Style code: OP-VNA-AQ"
+    ]
+  },
+  {
+    id: 8,
+    name: "Analia",
+    slug: "analia-embellished-skirt-corset-mini-dress",
+    tagline: "Embellished Skirt Corset Mini Dress in Sky Blue",
+    price: 95.00,
+    rating: 4.6,
+    reviewCount: 8,
+    images: ["/images/product_dress4.png"],
+    colors: ["Sky Blue", "White", "Lavender"],
+    sizes: ["XS", "S", "M", "L"],
+    description: "Combine structure and sparkles. Analia features a classic boned corset bodice with underwired support and a mini skirt completely covered in hand-embellished sequins.",
+    details: [
+      "Sequinned structured mini skirt",
+      "Fully boned underwire corset",
+      "Rear concealed zip",
+      "Style code: OP-ANL-SB"
+    ]
+  },
+  {
     id: 1,
-    name: "VALENCIA",
+    name: "Valencia",
     slug: "valencia-off-shoulder-satin-bodycon-mini-dress",
     tagline: "Off-Shoulder Satin Bodycon Mini Dress",
     price: 68.00,
@@ -20,7 +96,7 @@ const rawProducts = [
   },
   {
     id: 2,
-    name: "SORRENTO",
+    name: "Sorrento",
     slug: "sorrento-cutout-knit-midi-dress",
     tagline: "Cutout Knit Midi Dress",
     price: 74.00,
@@ -39,7 +115,7 @@ const rawProducts = [
   },
   {
     id: 3,
-    name: "AMALFI",
+    name: "Amalfi",
     slug: "amalfi-backless-silk-maxi-dress",
     tagline: "Backless Silk Maxi Dress",
     price: 92.00,
@@ -58,7 +134,7 @@ const rawProducts = [
   },
   {
     id: 4,
-    name: "MILAN",
+    name: "Milan",
     slug: "milan-structured-corset-mini-dress",
     tagline: "Structured Corset Mini Dress",
     price: 82.00,
