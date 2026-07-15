@@ -340,3 +340,234 @@
     padding: 24px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════
+   ACCOUNT SECURITY SECTION
+   ═══════════════════════════════════════════════════════ */
+
+.security-section {
+  margin-top: 36px;
+  border-top: 1px solid var(--color-light-gray);
+  padding-top: 24px;
+}
+
+.security-section-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-black);
+  text-align: left;
+  transition: color 0.2s ease;
+}
+
+.security-section-toggle:hover { color: var(--color-nude-dark); }
+
+.security-toggle-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.security-shield-icon { color: var(--color-nude-dark); }
+
+.security-toggle-arrow {
+  font-size: 10px;
+  color: var(--color-medium-gray);
+}
+
+.security-panel {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Session info grid */
+.security-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 700px) {
+  .security-info-grid { grid-template-columns: 1fr; }
+}
+
+.security-info-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-bg-light);
+  border-radius: 6px;
+  padding: 14px 16px;
+  border: 1px solid var(--color-light-gray);
+}
+
+.sec-card-icon { color: var(--color-medium-gray); flex-shrink: 0; }
+.sec-card-icon.active { color: #27ae60; }
+
+.security-info-card > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.sec-card-label {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-medium-gray);
+}
+
+.sec-card-value {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-black);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sec-active {
+  color: #27ae60 !important;
+  font-weight: 700 !important;
+}
+
+/* Security tips */
+.security-tips {
+  background: #fffbf0;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  padding: 16px 20px;
+}
+
+.sec-tips-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #92660a;
+  margin-bottom: 10px;
+}
+
+.sec-tips-list {
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  color: #7a5509;
+  line-height: 1.5;
+}
+
+/* Change Password block */
+.change-password-block {
+  border: 1px solid var(--color-light-gray);
+  border-radius: 6px;
+  padding: 24px;
+}
+
+.change-pw-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+  color: var(--color-black);
+}
+
+.change-pw-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cpw-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cpw-field label {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-dark-gray);
+}
+
+.cpw-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cpw-input-wrap input {
+  width: 100%;
+  border: 1px solid var(--color-light-gray);
+  padding: 12px 44px 12px 14px;
+  font-size: 12px;
+  transition: border-color 0.2s ease;
+}
+
+.cpw-input-wrap input:focus {
+  border-color: var(--color-black);
+  outline: none;
+}
+
+.cpw-eye-btn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-medium-gray);
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+
+.cpw-eye-btn:hover { color: var(--color-black); }
+
+.cpw-strength {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.cpw-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: var(--color-black);
+  color: #ffffff;
+  padding: 14px 24px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  align-self: flex-start;
+}
+
+.cpw-submit-btn:hover:not(:disabled) { background-color: var(--color-nude-dark); }
+.cpw-submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }

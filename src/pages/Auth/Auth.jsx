@@ -10,15 +10,13 @@ import LoyaltyInfoCard from './components/LoyaltyInfoCard';
 import './Auth.css';
 
 export default function Auth() {
-  const { user, login } = useApp();
+  const { user } = useApp();
   const [activeTab, setActiveTab] = useState('login');
   const navigate = useNavigate();
 
   // If already logged in, redirect to profile page
   useEffect(() => {
-    if (user) {
-      navigate('/profile');
-    }
+    if (user) navigate('/profile', { replace: true });
   }, [user, navigate]);
 
   // Don't render while redirecting
@@ -46,9 +44,9 @@ export default function Auth() {
           </div>
 
           {activeTab === 'login' ? (
-            <LoginForm onLogin={login} />
+            <LoginForm />
           ) : (
-            <RegisterForm onLogin={login} />
+            <RegisterForm />
           )}
         </div>
 

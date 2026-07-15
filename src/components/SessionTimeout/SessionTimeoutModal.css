@@ -1,0 +1,143 @@
+/* ═══════════════════════════════════════════════════════
+   SESSION TIMEOUT MODAL
+   ═══════════════════════════════════════════════════════ */
+
+.session-timeout-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+.session-timeout-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 48px 40px 40px;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(32px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* Icon pulse ring */
+.session-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fff0f3, #ffe4ec);
+  margin-bottom: 24px;
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+.session-clock-icon {
+  color: #c4556a;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(196, 85, 106, 0.25); }
+  50%       { box-shadow: 0 0 0 16px rgba(196, 85, 106, 0); }
+}
+
+.session-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-black);
+  margin-bottom: 12px;
+}
+
+.session-desc {
+  font-size: 13px;
+  color: var(--color-medium-gray);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+/* Countdown number */
+.session-countdown {
+  margin-bottom: 20px;
+}
+
+.countdown-number {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 700;
+  color: #c4556a;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+/* Progress bar */
+.session-progress-track {
+  height: 4px;
+  background: #f0f0f0;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.session-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #c4556a, #e8879a);
+  border-radius: 2px;
+  transition: width 1s linear;
+}
+
+/* Action buttons */
+.session-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.session-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.stay-btn {
+  background-color: var(--color-black);
+  color: #ffffff;
+}
+
+.stay-btn:hover {
+  background-color: #2d2d2d;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.leave-btn {
+  background-color: #ffffff;
+  color: var(--color-medium-gray);
+  border: 1px solid var(--color-light-gray) !important;
+}
+
+.leave-btn:hover {
+  border-color: var(--color-black) !important;
+  color: var(--color-black);
+}

@@ -1,4 +1,16 @@
-# Logs
+# Oh Polly — .gitignore (Security-Hardened)
+# ─────────────────────────────────────────
+
+# ── Build outputs ─────────────────────────────────────────────────────────────
+dist
+dist-ssr
+.output
+
+# ── Dependencies ──────────────────────────────────────────────────────────────
+node_modules
+**/node_modules
+
+# ── Logs (NEVER commit logs — they may contain PII or sensitive data) ─────────
 logs
 *.log
 npm-debug.log*
@@ -6,19 +18,53 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+backend/logs/
 
-node_modules
-dist
-dist-ssr
+# ── Environment files — NEVER commit secrets ──────────────────────────────────
+.env
+.env.*
+!.env.example         # Allow the template
+backend/.env
+backend/.env.*
+!backend/.env.example # Allow the backend template
 *.local
 
-# Editor directories and files
+# ── TLS / SSL — private keys MUST NEVER be committed ──────────────────────────
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.cer
+*.der
+*.csr
+/etc/letsencrypt/
+
+# ── Editor & OS ───────────────────────────────────────────────────────────────
 .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
+Thumbs.db
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*~
+
+# ── Security scan outputs (don't want these in git) ───────────────────────────
+trivy-results.sarif
+*.sarif
+.snyk
+snyk-report.*
+zap-report.*
+
+# ── Docker secrets (if using file-based secrets) ──────────────────────────────
+secrets/
+docker-secrets/
+
+# ── Local testing artifacts ───────────────────────────────────────────────────
+*.test-output
+coverage/
+.nyc_output/

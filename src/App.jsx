@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 
-// Global Components (via barrel)
+// Global Components
 import {
   Header,
   Footer,
@@ -11,6 +11,10 @@ import {
   NetworkStatus,
   ErrorBoundary
 } from './components/global';
+
+// Security Components
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import SessionTimeoutModal from './components/SessionTimeout/SessionTimeoutModal';
 
 // Pages
 import Home          from './pages/Home/Home';
@@ -34,24 +38,34 @@ function App() {
             <CookiePopup />
             <NetworkStatus />
 
+            {/* Session timeout warning — shown 2 min before auto-logout */}
+            <SessionTimeoutModal />
+
             <main>
               <Routes>
-                {/* Core pages */}
+                {/* Public pages */}
                 <Route path="/"                        element={<Home />} />
                 <Route path="/collections/dresses"     element={<Collection />} />
                 <Route path="/products/:slug"          element={<ProductDetail />} />
 
-                {/* Auth */}
+                {/* Auth — redirect to profile if already logged in */}
                 <Route path="/login"                   element={<Auth />} />
-                {/* Legacy /register alias → /login */}
                 <Route path="/register"                element={<Navigate to="/login" replace />} />
 
-                {/* Shopping flow */}
+                {/* Shopping flow — Cart is public, Checkout is protected */}
                 <Route path="/cart"                    element={<Cart />} />
-                <Route path="/checkout"                element={<Checkout />} />
+                <Route path="/checkout"                element={
+                  <ProtectedRoute>
+                    <Checkout />
+                  </ProtectedRoute>
+                } />
 
-                {/* Account */}
-                <Route path="/profile"                 element={<Profile />} />
+                {/* Account — protected */}
+                <Route path="/profile"                 element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                } />
 
                 {/* Sitemap */}
                 <Route path="/sitemap"                 element={<Sitemap />} />

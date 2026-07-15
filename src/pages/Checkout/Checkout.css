@@ -359,3 +359,116 @@
   font-weight: 600;
   letter-spacing: 0.1em;
 }
+
+/* ═══════════════════════════════════════════════════════
+   PCI DSS PAYMENT SECURITY STYLES
+   ═══════════════════════════════════════════════════════ */
+
+/* PCI notice banner */
+.pci-notice-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #f0fff4;
+  border: 1px solid #b7e4c7;
+  border-left: 4px solid #27ae60;
+  border-radius: 4px;
+  padding: 14px 16px;
+  font-size: 12px;
+  color: #1b6b3a;
+  line-height: 1.6;
+}
+
+.pci-notice-banner svg { flex-shrink: 0; margin-top: 1px; color: #27ae60; }
+
+.pci-notice-banner strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+/* Stripe Elements placeholder */
+.stripe-elements-placeholder {
+  border: 1px solid var(--color-light-gray);
+  border-radius: 4px;
+  padding: 16px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stripe-field-mock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 14px 16px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+.stripe-field-mock.half { flex: 1; }
+
+.stripe-mock-row { display: flex; gap: 10px; }
+
+.stripe-icon  { color: #635bff; flex-shrink: 0; }
+.stripe-lock  { color: #27ae60; margin-left: auto; flex-shrink: 0; }
+
+.stripe-powered-by {
+  text-align: center;
+  font-size: 10px;
+  color: var(--color-medium-gray);
+  letter-spacing: 0.05em;
+}
+
+/* Payment acknowledgement */
+.payment-acknowledge-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 11px;
+  color: var(--color-dark-gray);
+  line-height: 1.5;
+  padding: 2px 0;
+}
+
+.payment-acknowledge-row .custom-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--color-medium-gray);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.payment-acknowledge-row .custom-checkbox.checked {
+  background-color: var(--color-black);
+  border-color: var(--color-black);
+  color: #fff;
+}
+
+/* Field-level validation error */
+.input-field.field-error input,
+.input-field.field-error select {
+  border-color: #e05a5a !important;
+}
+
+.checkout-field-error {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #e05a5a;
+  margin-top: 3px;
+}

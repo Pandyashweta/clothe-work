@@ -4,20 +4,67 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ── SEO ──────────────────────────────────────────────────────────── -->
     <meta name="description" content="Shop Oh Polly for women's fashion, satin bodycon dresses, midi dresses, swimwear, and co-ords. Enjoy worldwide shipping and rewards point earnings." />
     <meta name="keywords" content="Oh Polly, fashion, dresses, satin dress, midi dress, bodycon, women's clothing, swimwear" />
     <title>Oh Polly Official Site │ Elevate Every Occasion</title>
-    
+
+    <!-- ── Security Meta Tags ───────────────────────────────────────────── -->
+
+    <!-- Prevents referrer info leaking to third-party sites -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Opt out of Google FLoC / Topics API tracking -->
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
+
+    <!-- Opt out of IE Compatibility Mode (mitigates XSS vectors in older IE) -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!--
+      Content Security Policy — restricts what content can load.
+      In production, move this to a server-side HTTP header (more secure).
+      Current policy:
+        default-src 'self'            — only same-origin by default
+        script-src  'self' 'unsafe-inline'  — allow inline React scripts (vite dev)
+        style-src   'self' 'unsafe-inline' fonts.googleapis.com
+        font-src    'self' fonts.gstatic.com
+        img-src     'self' data: blob: *.vimeocdn.com *.instagram.com
+        media-src   'self' *.vimeo.com player.vimeo.com
+        connect-src 'self' http://localhost:5000
+        frame-src   'none'            — prevents clickjacking
+    -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval';
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com data:;
+      img-src 'self' data: blob: https://*.vimeocdn.com https://*.instagram.com https://*.cdninstagram.com;
+      media-src 'self' https://player.vimeo.com https://*.vimeo.com;
+      connect-src 'self' http://localhost:5000 http://localhost:5173;
+      frame-src 'none';
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+    " />
+
     <script>
-      // Frame-busting clickjacking protection
+      // ── Frame-busting: prevent clickjacking via iframe embedding ─────────
       if (window.self !== window.top) {
         window.top.location = window.self.location;
       }
-      
-      // Disable dragging elements globally to prevent overlay hijack
+
+      // ── Disable drag-to-overlay hijack ───────────────────────────────────
       window.addEventListener('dragstart', function(e) {
         e.preventDefault();
       });
+
+      // ── Console warning for curious devs ────────────────────────────────
+      try {
+        const style = 'color:#c4556a;font-size:20px;font-weight:bold;';
+        console.log('%c⚠ STOP!', style);
+        console.log('%cThis browser console is for developers. If someone told you to paste something here, it is a scam.', 'color:#333;font-size:13px;');
+      } catch(e) {}
     </script>
   </head>
   <body>

@@ -292,8 +292,272 @@
   margin-bottom: 4px;
 }
 
+/* ───── existing last rule ─────────────────────────────── */
 .reward-bullet p {
   font-size: 11px;
   color: var(--color-medium-gray);
   line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SECURITY ADDITIONS — Error banners, lockout, strength
+   ═══════════════════════════════════════════════════════ */
+
+/* Generic error banner */
+.auth-error-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #fff5f5;
+  border: 1px solid #ffc0c0;
+  border-left: 4px solid #e05a5a;
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-size: 12px;
+  color: #b52b2b;
+  line-height: 1.5;
+}
+
+.auth-error-banner div { display: flex; flex-direction: column; gap: 2px; }
+
+.attempts-warn {
+  font-size: 11px;
+  color: #c0392b;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* Success banner */
+.auth-success-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f0fff4;
+  border: 1px solid #b7e4c7;
+  border-left: 4px solid #27ae60;
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-size: 12px;
+  color: #1b7a46;
+}
+
+/* Lockout banner */
+.auth-lockout-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #fffbf0;
+  border: 1px solid #ffd580;
+  border-left: 4px solid #f39c12;
+  border-radius: 4px;
+  padding: 14px 16px;
+  font-size: 12px;
+  color: #856404;
+  line-height: 1.5;
+}
+
+.auth-lockout-banner strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+.auth-lockout-banner p { margin: 0; }
+
+/* Field-level inline error */
+.form-input-group.has-error input {
+  border-color: #e05a5a !important;
+}
+
+.field-error-msg {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #e05a5a;
+  margin-top: 2px;
+}
+
+/* Password show/hide toggle */
+.input-with-action {
+  position: relative;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-medium-gray);
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  transition: color 0.2s ease;
+}
+
+.password-toggle-btn:hover { color: var(--color-black); }
+
+.input-with-action input { padding-right: 44px; }
+
+/* ── Password Strength Meter ───────────────────────────── */
+.password-strength-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.strength-bar-track {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.strength-bar-segment {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+}
+
+.strength-label {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Password Rules Checklist ──────────────────────────── */
+.password-rules-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rule-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  transition: color 0.2s ease;
+}
+
+.rule-item.met  { color: #27ae60; }
+.rule-item.unmet { color: var(--color-medium-gray); }
+
+.rule-item.met .rule-icon  { color: #27ae60; }
+.rule-item.unmet .rule-icon { color: #cccccc; }
+
+/* ── Match Indicator ───────────────────────────────────── */
+.match-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+.match-indicator.match   { color: #27ae60; }
+.match-indicator.no-match { color: #e05a5a; }
+
+/* ── Remember Me / Custom Checkbox ────────────────────── */
+.remember-me-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-dark-gray);
+  margin: 6px 0;
+}
+
+.custom-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--color-medium-gray);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.custom-checkbox.checked {
+  background-color: var(--color-black);
+  border-color: var(--color-black);
+  color: #ffffff;
+}
+
+/* ── Attempt Counter ───────────────────────────────────── */
+.attempt-counter-text {
+  text-align: center;
+  font-size: 10px;
+  color: var(--color-medium-gray);
+  letter-spacing: 0.05em;
+}
+
+/* ── Demo hint box ─────────────────────────────────────── */
+.demo-hint-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-bg-light);
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-size: 11px;
+  color: var(--color-dark-gray);
+}
+
+.demo-hint-box p { margin: 0; }
+
+/* ── Social Login icons ────────────────────────────────── */
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.social-icon-apple,
+.social-icon-google {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.social-icon-apple {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath d='M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-48-20.7-77.5-20.7C79.3 139.3 40 161 20.4 196c-40 70 -10.9 173.8 28.1 229.7 19.2 27.7 41.7 57.2 70 56.7 27.4-.5 37.8-17.2 70.8-17.2 32.7 0 42.4 17.2 71 16.6 29.5-.5 49-26.2 67.8-53.9 22.3-32.3 31.2-63.5 31.7-65.2-1-1.3-61.4-23.7-61.7-93.3zM286.9 83.1c16.2-19.5 27.3-46.7 24.3-73.8-23.3 1-51.6 15.6-68.3 35.1-14.8 17.1-27.8 44.5-24.3 71 25.8 2 52.4-12.8 68.3-32.3z'/%3E%3C/svg%3E");
+}
+
+.social-icon-google {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 488 512'%3E%3Cpath fill='%234285F4' d='M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z'/%3E%3C/svg%3E");
+}
+
+/* Spinning loader */
+.spin-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }

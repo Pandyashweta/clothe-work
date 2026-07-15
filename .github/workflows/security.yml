@@ -1,0 +1,207 @@
+name: 🔐 Security CI Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run weekly security audit every Monday at 08:00 UTC
+    - cron: '0 8 * * 1'
+
+permissions:
+  contents: read          # minimal: only read source
+  security-events: write  # needed for SARIF upload
+  actions: read
+
+jobs:
+
+  # ── Job 1: Dependency Security Audit ──────────────────────────────────────
+  dependency-audit:
+    name: 📦 Dependency Vulnerability Scan
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Audit frontend dependencies
+        run: npm audit --audit-level=high
+        working-directory: .
+
+      - name: Audit backend dependencies
+        run: npm audit --audit-level=high
+        working-directory: ./backend
+
+      - name: Check for known vulnerable packages (Snyk)
+        uses: snyk/actions/node@master
+        continue-on-error: true  # Report but don't block (adjust to false for production)
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+
+  # ── Job 2: Secret Scanning ─────────────────────────────────────────────────
+  secret-scan:
+    name: 🔑 Secret Detection
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0        # Full history for secret scanning
+          persist-credentials: false
+
+      - name: Run TruffleHog (detect secrets in git history)
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --only-verified
+
+      - name: Run GitLeaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ── Job 3: SAST — Static Application Security Testing ─────────────────────
+  sast:
+    name: 🔍 SAST Scan
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript, typescript
+          queries: security-extended
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: /language:javascript
+
+      - name: Run Semgrep SAST
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: >-
+            p/security-audit
+            p/owasp-top-ten
+            p/javascript
+            p/typescript
+            p/react
+            p/nodejs
+        env:
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+
+  # ── Job 4: Docker Security Scan ───────────────────────────────────────────
+  container-scan:
+    name: 🐳 Container Security Scan
+    runs-on: ubuntu-24.04
+    needs: dependency-audit
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Build container image
+        run: docker build -t ohpolly-api:${{ github.sha }} ./backend
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ohpolly-api:${{ github.sha }}
+          format: sarif
+          output: trivy-results.sarif
+          severity: CRITICAL,HIGH
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: trivy-results.sarif
+
+  # ── Job 5: Frontend Security Build Verification ───────────────────────────
+  build-verify:
+    name: 🏗️ Build & Security Lint
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run security-focused linter (oxlint)
+        run: npx oxlint --deny-warnings || true
+
+      - name: Build production bundle
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Check bundle for exposed secrets
+        run: |
+          # Scan built JS for common secret patterns
+          if grep -rE "(sk_live|pk_live|AKIA|password.*=.*['\"][A-Za-z0-9]{16,}|secret.*=.*['\"][A-Za-z0-9]{32,})" dist/; then
+            echo "⚠️ Potential secret found in build output!"
+            exit 1
+          fi
+          echo "✅ No secrets detected in build output"
+
+  # ── Job 6: Security Headers Check (post-deploy) ───────────────────────────
+  security-headers:
+    name: 🛡️ Security Headers Verification
+    runs-on: ubuntu-24.04
+    if: github.event_name == 'schedule'
+    steps:
+      - name: Check security headers on production
+        run: |
+          SITE="https://yourdomain.com"
+          HEADERS=$(curl -sI "$SITE")
+          
+          check_header() {
+            if echo "$HEADERS" | grep -qi "$1"; then
+              echo "✅ $1"
+            else
+              echo "❌ MISSING: $1"
+              exit 1
+            fi
+          }
+          
+          check_header "strict-transport-security"
+          check_header "x-frame-options"
+          check_header "x-content-type-options"
+          check_header "referrer-policy"
+          check_header "content-security-policy"
+          check_header "permissions-policy"
+
+  # ── Job 7: OWASP ZAP DAST (scheduled only) ─────────────────────────────
+  dast:
+    name: 🎯 DAST Scan (ZAP)
+    runs-on: ubuntu-24.04
+    if: github.event_name == 'schedule'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Run ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          target: 'https://staging.yourdomain.com'
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a'

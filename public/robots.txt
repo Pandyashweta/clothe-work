@@ -1,0 +1,28 @@
+# Oh Polly — robots.txt
+# Blocks search crawlers from indexing sensitive paths
+# Last updated: 2026-07-15
+
+User-agent: *
+
+# Block all auth, API, and user-specific paths
+Disallow: /api/
+Disallow: /login
+Disallow: /register
+Disallow: /profile
+Disallow: /checkout
+Disallow: /cart
+Disallow: /reset-password
+
+# Block internal development/build artifacts
+Disallow: /node_modules/
+Disallow: /.env
+Disallow: /.git/
+Disallow: /dist/
+
+# Allow everything else (product pages, collections, sitemap)
+Allow: /collections/
+Allow: /products/
+Allow: /sitemap
+
+# Sitemap location
+Sitemap: https://yourdomain.com/sitemap.xml
