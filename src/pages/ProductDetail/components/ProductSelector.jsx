@@ -1,6 +1,13 @@
 import React from 'react';
 import { Heart, Ruler } from 'lucide-react';
 
+// Inline helper Share2 icon (defined before use to avoid ReferenceError)
+function Share2Icon({ size }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-share-2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+  );
+}
+
 export default function ProductSelector({
   product,
   selectedColor, setSelectedColor,
@@ -10,7 +17,7 @@ export default function ProductSelector({
   getPrice, setIsSizeGuideOpen
 }) {
   return (
-    <div className="info-section">
+    <>
       <span className="brand-tag">OH POLLY</span>
       <div className="title-row">
         <h1 className="product-title">{product.name}</h1>
@@ -55,7 +62,13 @@ export default function ProductSelector({
                   color.toLowerCase() === 'cream' ? '#f5f2eb' :
                   color.toLowerCase() === 'black' ? '#000000' :
                   color.toLowerCase() === 'blush pink' ? '#ffd1dc' :
-                  color.toLowerCase() === 'sage green' ? '#87a96b' : '#ffffff' 
+                  color.toLowerCase() === 'sky blue' ? '#add8e6' :
+                  color.toLowerCase() === 'aqua blue' ? '#00ced1' :
+                  color.toLowerCase() === 'sage green' ? '#87a96b' :
+                  color.toLowerCase() === 'lavender' ? '#e6e6fa' :
+                  color.toLowerCase() === 'blush' ? '#f3ded7' :
+                  color.toLowerCase() === 'sage' ? '#87a96b' :
+                  color.toLowerCase() === 'white' ? '#f8f8f8' : '#cccccc'
               }}
               title={color}
             />
@@ -104,13 +117,6 @@ export default function ProductSelector({
       <div className="payment-installments">
         <p>Or 4 interest-free payments of <strong>{getPrice(product.price / 4)}</strong> with <span>Klarna</span> or <span>Afterpay</span>.</p>
       </div>
-    </div>
-  );
-}
-
-// Inline helper Share2 icon
-function Share2Icon({ size }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-share-2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+    </>
   );
 }

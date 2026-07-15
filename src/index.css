@@ -300,3 +300,8 @@ input:focus, select:focus, textarea:focus {
 .wishlist-card-btn.active {
   color: var(--color-black);
 }
+
+/* Global animation utility */
+.animate-fade {
+  animation: fadeIn 0.4s ease-in-out;
+}

@@ -6,25 +6,33 @@ export const useApp = () => useContext(AppContext);
 
 export const AppProvider = ({ children }) => {
   const [cart, setCart] = useState(() => {
-    const localData = localStorage.getItem('ohpolly_cart');
-    return localData ? JSON.parse(localData) : [];
+    try {
+      const localData = localStorage.getItem('ohpolly_cart');
+      return localData ? JSON.parse(localData) : [];
+    } catch { return []; }
   });
   
   const [wishlist, setWishlist] = useState(() => {
-    const localData = localStorage.getItem('ohpolly_wishlist');
-    return localData ? JSON.parse(localData) : [];
+    try {
+      const localData = localStorage.getItem('ohpolly_wishlist');
+      return localData ? JSON.parse(localData) : [];
+    } catch { return []; }
   });
   
   const [currency, setCurrency] = useState('USD'); // Default currency
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [user, setUser] = useState(() => {
-    const localUser = localStorage.getItem('ohpolly_user');
-    return localUser ? JSON.parse(localUser) : null;
+    try {
+      const localUser = localStorage.getItem('ohpolly_user');
+      return localUser ? JSON.parse(localUser) : null;
+    } catch { return null; }
   });
   const [orders, setOrders] = useState(() => {
-    const localOrders = localStorage.getItem('ohpolly_orders');
-    return localOrders ? JSON.parse(localOrders) : [];
+    try {
+      const localOrders = localStorage.getItem('ohpolly_orders');
+      return localOrders ? JSON.parse(localOrders) : [];
+    } catch { return []; }
   });
 
   // Persist state to localstorage

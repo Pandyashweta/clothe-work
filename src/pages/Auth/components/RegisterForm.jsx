@@ -77,7 +77,7 @@ export default function RegisterForm({ onLogin }) {
 
       <div className="checkbox-row" onClick={() => setNewsletter(!newsletter)}>
         {newsletter ? <CheckSquare size={18} /> : <Square size={18} />}
-        <span>SIGN UP FOR NEWSLETTER &amp; LOYALTY UPDATES</span>
+        <span>SIGN UP FOR NEWSLETTER & LOYALTY UPDATES</span>
       </div>
 
       <button type="submit" className="submit-auth-btn">

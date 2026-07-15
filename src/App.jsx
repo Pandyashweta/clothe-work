@@ -34,7 +34,7 @@ function App() {
             <CookiePopup />
             <NetworkStatus />
 
-            <main className="main-content-layout">
+            <main>
               <Routes>
                 {/* Core pages */}
                 <Route path="/"                        element={<Home />} />

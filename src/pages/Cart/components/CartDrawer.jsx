@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../../context/AppContext';
 import { X, Plus, Minus, Trash2, ArrowRight } from 'lucide-react';
@@ -18,7 +18,17 @@ export default function CartDrawer() {
 
   const navigate = useNavigate();
 
-  // Find recommendations: products not in cart, or just first few products
+  // Lock body scroll when drawer is open
+  useEffect(() => {
+    if (isCartOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isCartOpen]);
+
+  // Find recommendations: products not in cart
   const recommendations = products.filter(
     (prod) => !cart.some((item) => item.id === prod.id)
   );
@@ -33,11 +43,9 @@ export default function CartDrawer() {
     navigate('/cart');
   };
 
-  if (!isCartOpen) return null;
-
   return (
-    <div className="cart-drawer-overlay" onClick={() => setIsCartOpen(false)}>
-      <div className="cart-drawer" onClick={(e) => e.stopPropagation()}>
+    <div className={`cart-drawer-overlay ${isCartOpen ? 'open' : ''}`} onClick={() => setIsCartOpen(false)}>
+      <div className={`cart-drawer ${isCartOpen ? 'open' : ''}`} onClick={(e) => e.stopPropagation()}>
         
         {/* Drawer Header */}
         <div className="cart-drawer-header">

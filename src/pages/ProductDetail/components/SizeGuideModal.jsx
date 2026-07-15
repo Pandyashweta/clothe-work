@@ -6,7 +6,7 @@ export default function SizeGuideModal({ isOpen, onClose }) {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content size-guide-modal" onClick={(e) => e.stopPropagation()}>
+      <div className="size-guide-modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h3>OH POLLY SIZE GUIDE</h3>
           <button className="modal-close-btn" onClick={onClose}>×</button>

@@ -55,6 +55,19 @@ export default function Checkout() {
     setIsSuccess(true);
   };
 
+  // If cart is empty and not success, redirect to collections
+  if (!isSuccess && cart.length === 0) {
+    return (
+      <div className="checkout-page main-content container flex-center">
+        <div className="empty-checkout-fallback">
+          <h3>YOUR BAG IS EMPTY</h3>
+          <p>Please add products to your bag before proceeding to checkout.</p>
+          <Link to="/collections/dresses" className="shop-btn">SHOP NOW</Link>
+        </div>
+      </div>
+    );
+  }
+
   if (isSuccess) {
     return (
       <div className="checkout-page success-flow main-content container flex-center animate-fade">
@@ -78,19 +91,6 @@ export default function Checkout() {
           <button className="back-to-home-btn" onClick={() => navigate('/')}>
             CONTINUE SHOPPING <ArrowRight size={16} />
           </button>
-        </div>
-      </div>
-    );
-  }
-
-  // If cart is empty and not success, redirect to collections
-  if (cart.length === 0) {
-    return (
-      <div className="checkout-page main-content container flex-center">
-        <div className="empty-checkout-fallback">
-          <h3>YOUR BAG IS EMPTY</h3>
-          <p>Please add products to your bag before proceeding to checkout.</p>
-          <Link to="/collections/dresses" className="shop-btn">SHOP NOW</Link>
         </div>
       </div>
     );
